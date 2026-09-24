@@ -89,6 +89,18 @@ The architecture and training objectives are implemented. On September 24, 2026,
 
 No paper-scale training run or claim of matching the published metrics is included yet. The paper reports 97.78% generated-face top-1 classification accuracy and a realism score of 19.03 for CVAE-GAN; those numbers are reference values, not results produced by this repository.
 
+### Expected full-run targets
+
+These targets come from the original paper and must not be interpreted as measurements from this repository:
+
+| Metric | Expected target |
+|---|---:|
+| Generated-face top-1 classification accuracy | approximately 97.78% |
+| Realism score used by the paper | approximately 19.03 |
+| LFW accuracy with 5k synthetic identities | approximately 92.98% |
+
+The verified local result is limited to successful tests plus an end-to-end smoke run. Actual full-dataset metrics remain pending.
+
 To repeat the verified smoke path after preparing any two-class ImageFolder dataset:
 
 ```bash
