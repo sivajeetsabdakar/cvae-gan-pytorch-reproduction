@@ -57,6 +57,8 @@ python train.py \
   --amp
 ```
 
+Use `--max-steps 1` for a quick end-to-end smoke test before starting a long run.
+
 Checkpoints, sample grids, and TensorBoard events are written below the selected output directory.
 
 ```bash
@@ -83,7 +85,19 @@ The tests exercise model shapes, backpropagation, and the feature-matching losse
 
 ## Reproduction status
 
-The architecture and training objectives are implemented. No paper-scale training run or claim of matching the published metrics is included yet. The paper reports 97.78% generated-face top-1 classification accuracy and a realism score of 19.03 for CVAE-GAN; those numbers are reference values, not results produced by this repository.
+The architecture and training objectives are implemented. On September 24, 2026, the test suite passed (`2 passed`) with PyTorch 2.14.0+cpu and torchvision 0.29.0+cpu. A one-step, two-class CPU smoke run completed the full training loop, wrote a checkpoint, and generated a sample grid from that checkpoint.
+
+No paper-scale training run or claim of matching the published metrics is included yet. The paper reports 97.78% generated-face top-1 classification accuracy and a realism score of 19.03 for CVAE-GAN; those numbers are reference values, not results produced by this repository.
+
+To repeat the verified smoke path after preparing any two-class ImageFolder dataset:
+
+```bash
+python train.py --data data/smoke --output runs/smoke --epochs 1 \
+  --batch-size 2 --workers 0 --latent-dim 32 --max-steps 1
+python sample.py --checkpoint runs/smoke/checkpoints/epoch-0001.pt \
+  --output runs/smoke/generated-grid.png --per-class 2
+```
+
 
 ## Presentation
 
@@ -101,4 +115,3 @@ Jianmin Bao, Dong Chen, Fang Wen, Houqiang Li, and Gang Hua. "CVAE-GAN: Fine-Gra
   year={2017}
 }
 ```
-

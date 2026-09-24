@@ -39,6 +39,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--lambda-c-match", type=float, default=1e-3)
     parser.add_argument("--sample-every", type=int, default=500)
     parser.add_argument("--checkpoint-every", type=int, default=5)
+    parser.add_argument("--max-steps", type=int, default=0, help="Stop after N updates; 0 runs all epochs")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--amp", action="store_true", help="Use CUDA automatic mixed precision")
     return parser.parse_args()
@@ -164,6 +165,8 @@ def main() -> None:
                     save_image((samples + 1) / 2, sample_dir / f"step-{global_step:07d}.png", nrow=4)
                 model.train()
             global_step += 1
+            if args.max_steps and global_step >= args.max_steps:
+                break
 
         if epoch % args.checkpoint_every == 0 or epoch == args.epochs:
             save_checkpoint(
@@ -174,10 +177,11 @@ def main() -> None:
                 classes,
                 vars(args) | {"data": str(args.data), "output": str(args.output)},
             )
+        if args.max_steps and global_step >= args.max_steps:
+            break
 
     writer.close()
 
 
 if __name__ == "__main__":
     main()
-

@@ -58,7 +58,7 @@
       \item \textbf{Problem:} conditional generators struggle to produce images that are realistic, diverse, and faithful to a fine-grained class.
       \item \textbf{Motivation:} VAE outputs tend to blur; GAN training can suffer from unstable gradients and mode collapse.
       \item \textbf{Main contribution:} a conditional VAE-GAN with asymmetric objectives, mean feature matching, and pairwise reconstruction constraints.
-      \item \textbf{Project code:} \href{\RepoURL}{\textcolor{Cyan}{\RepoURL}} \quad \pending
+      \item \textbf{Project code:} \href{\RepoURL}{\textcolor{Cyan}{\RepoURL}}
     \end{itemize}
   \end{column}
   \begin{column}{0.40\textwidth}
@@ -102,7 +102,7 @@
       \item \textbf{Dataset preparation:} align FaceScrub faces from five landmarks; crop Oxford Flowers using masks; retain original CUB-200 images; resize inputs to $128\times128$.
       \item \textbf{Implementation approach:} alternate network updates exactly as Algorithm 1 and use moving averages for class-specific feature centers.
       \item \textbf{Experimental setup:} train all networks from scratch; sample $z\sim\mathcal{N}(0,I)$ for category-conditioned testing.
-      \item \textbf{Workspace status:} no source code, checkpoints, or logs were present in \texttt{LAB03}. Framework changes and executed settings are therefore \pending.
+      \item \textbf{Implementation status:} PyTorch code, shape/loss tests, checkpointing, sampling, and a one-step CPU smoke run are verified. Paper-scale training remains \pending.
     \end{itemize}
   \end{column}
 \end{columns}
@@ -137,8 +137,8 @@
     {\small\bfseries Original vs. reproduced}\par\vspace{0.2em}
     {\footnotesize
     \textbf{Original evaluation:} 53k generated faces.\par
-    \textbf{Reproduced metrics:} \pending\par
-    \textbf{Difference:} not computable without a run.\par}
+    \textbf{Smoke reproduction:} training and sampling passed.\par
+    \textbf{Paper-scale metrics:} \pending; not comparable yet.\par}
     \source{Metrics reproduced from paper Table 1. ``Realism'' is the paper's Inception Score variant.}
   \end{column}
 \end{columns}
@@ -150,7 +150,7 @@
   \begin{column}{0.56\textwidth}
     \footnotesize
     \begin{itemize}\setlength\itemsep{0.27em}
-      \item \textbf{Reproduction status:} the paper analysis and presentation are complete; model reproduction remains \pending because the workspace contains no implementation or run artifacts.
+      \item \textbf{Reproduction status:} implementation and end-to-end smoke validation succeeded; dataset-scale training and metric replication remain \pending.
       \item \textbf{Major finding:} feature matching stabilizes conditional GAN training, while the encoder and pairwise losses protect diversity and class structure.
       \item \textbf{Reported impact:} synthetic identity augmentation improved LFW verification from 91.87\% to 92.98\% in the paper.
       \item \textbf{Challenges:} legacy Torch code, three datasets with different preprocessing, four-network optimization, and evaluation with a separate classifier.
